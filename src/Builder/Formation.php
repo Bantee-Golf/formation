@@ -124,6 +124,18 @@ class Formation
 		return $this->toHtmlString($renderedContent);
 	}
 
+	public function submit()
+	{
+		$htmlContent = '<div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+                <a href="' . url()->previous() . '" class="btn btn-default pull-right">Cancel</a>
+                <button type="submit" class="btn btn-success text-right">Save</button>
+            </div>
+        </div>';
+
+        return $this->toHtmlString($htmlContent);
+	}
+
 	/**
 	 *
 	 * Set the fields from the model's config
