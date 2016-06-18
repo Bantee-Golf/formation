@@ -124,7 +124,7 @@ class Formation
 		return $this->toHtmlString($renderedContent);
 	}
 
-	public function submit()
+	public function renderSubmit()
 	{
 		$htmlContent = '<div class="form-group">
             <div class="col-sm-10 col-sm-offset-2">
