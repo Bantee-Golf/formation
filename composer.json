@@ -4,8 +4,8 @@
   "type": "package",
   "require": {
     "php": ">=5.5.9",
-    "illuminate/support": "5.2.*",
-    "illuminate/session": "5.2.*"
+    "illuminate/support": "5.2.*|5.3.*",
+    "illuminate/session": "5.2.*|5.3.*"
   },
   "license": "private",
   "authors": [

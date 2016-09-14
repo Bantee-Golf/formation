@@ -40,7 +40,7 @@ class Formation
         </div>
 	 *
 	 */
-	public function render()
+	public function render($fieldName = null)
 	{
 		$labelLayoutClass = 'col-sm-2';
 		$fieldLayoutClass = 'col-sm-10';
@@ -50,6 +50,11 @@ class Formation
 		$user = auth()->user();
 
 		foreach($this->fields as $field) {
+
+			// if a fieldname is given, only render that one
+			if ($fieldName && $fieldName !== $field['name']) {
+				continue;
+			}
 
 			// check user permissions
 			// if the user doesn't have the given role, don't show the field
@@ -76,7 +81,16 @@ class Formation
 
 				$field = $this->input('text', $field['name'], $field['value'], $options);
 
+			} else if ($field['type'] === 'textarea') {
+
+				$field = $this->textarea($field['name'], $field['value'], $options);
+
 			} else if ($field['type'] === 'date') {
+
+				// get the additional data attributes from the Model
+				// add them to HTML
+				// read the HTML from JS
+				// update widget options
 
 				$options['class'] .= ' ' . 'js-datepicker';
 				$options['data-date-format'] = 'DD/MMM/YYYY';
@@ -84,6 +98,25 @@ class Formation
 				if ($field['value'] instanceof Carbon) {
 					$options['data-default-date'] = $field['value']->format('d/M/Y');
 				}
+
+				// set min/max dates
+				if (!empty($field['data'])) {
+					// set min date
+					if (!empty($field['data']['min_date'])) {
+						$givenDate = $field['data']['min_date'];
+						if (!empty($givenDate)) {
+							$options['data-min-date'] = $givenDate;
+						}
+					}
+					// set max date
+					if (!empty($field['data']['max_date'])) {
+						$givenDate = $field['data']['max_date'];
+						if (!empty($givenDate)) {
+							$options['data-max-date'] = $givenDate;
+						}
+					}
+				}
+
 				$field = $this->input('text', $field['name'], $inputDate, $options);
 
 			} else if ($field['type'] === 'select') {
