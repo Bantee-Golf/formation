@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Collection;
+use Illuminate\Support\HtmlString;
 use Illuminate\View\Factory;
 
 class Formation
@@ -26,7 +27,7 @@ class Formation
 
 	public function addField($name, $type, $order = null)
 	{
-		
+
 	}
 
 	/*
@@ -79,11 +80,11 @@ class Formation
 
 			if ($field['type'] === 'text') {
 
-				$field = $this->input('text', $field['name'], $field['value'], $options);
+				$fieldObj = $this->input('text', $field['name'], $field['value'], $options);
 
 			} else if ($field['type'] === 'textarea') {
 
-				$field = $this->textarea($field['name'], $field['value'], $options);
+				$fieldObj = $this->textarea($field['name'], $field['value'], $options);
 
 			} else if ($field['type'] === 'date') {
 
@@ -117,7 +118,7 @@ class Formation
 					}
 				}
 
-				$field = $this->input('text', $field['name'], $inputDate, $options);
+				$fieldObj = $this->input('text', $field['name'], $inputDate, $options);
 
 			} else if ($field['type'] === 'select') {
 				// build the options
@@ -133,25 +134,40 @@ class Formation
 
 					// build the class and fetch the options
 					$actionsClass = app($matches[1][0]);
-					$optionsList = $actionsClass->$matches[2][0]();
+
+					// if there is an array of arguments, pass that in
+					if (isset($field['options_action_params']) && is_array($field['options_action_params'])) {
+						$optionsList = $actionsClass->$matches[2][0]($field['options_action_params']);
+					} else {
+						$optionsList = $actionsClass->$matches[2][0]();
+					}
 				} else if (isset($field['options_entity'])) {
 					$actionsClass = app($field['options_entity']);
 					$optionsList = $actionsClass->all()->pluck('name', 'id');
 				}
-				$field = $this->select($field['name'], $optionsList, $field['value'], $options);
+				$fieldObj = $this->select($field['name'], $optionsList, $field['value'], $options);
 			}
 
-			$fieldWrapper = $this->tag('div', $field->toHtml(), [
-				'class' => $fieldLayoutClass
-			]);
+			if ($field['type'] === 'hidden') {
 
-			// TODO: add vertical layouts
-			$formGroupWrapper = $this->tag('div',
-				$label->toHtml() . $fieldWrapper->toHtml(), [
-					'class' => 'form-group'
+				$options = (isset($field['options']))? $field['options']: [];
+				$field = $this->hidden($field['name'], $field['value'], $options);
+				$renderedContent .= $field->toHtml();
+
+			} else if (!empty($fieldObj)) {
+				// wrap the existing obj with containers
+				$fieldWrapper = $this->tag('div', $fieldObj->toHtml(), [
+					'class' => $fieldLayoutClass
 				]);
 
-			$renderedContent .= $formGroupWrapper->toHtml();
+				// TODO: add vertical layouts
+				$formGroupWrapper = $this->tag('div',
+					$label->toHtml() . $fieldWrapper->toHtml(), [
+						'class' => 'form-group'
+					]);
+
+				$renderedContent .= $formGroupWrapper->toHtml();
+			}
 		}
 
 		return $this->toHtmlString($renderedContent);
@@ -166,7 +182,7 @@ class Formation
             </div>
         </div>';
 
-        return $this->toHtmlString($htmlContent);
+		return $this->toHtmlString($htmlContent);
 	}
 
 	/**
@@ -175,35 +191,36 @@ class Formation
 	 * eg. Use the following in the model
 	 *
 	 * 	protected $editable = [
-				[
-					'name' => 'first_name',
-					'display_name' => 'Your first name',
-					'value' => '1234',
-				],
-				[
-					'name' => 'last_name'
-				],
-				[
-					'name' => 'title'
-				],
-	 			[
-					'name' => 'project_status_id',
-					'display_name' => 'Project Status',
-					'type' => 'select',
-					// 'options' => [
-					//		1 => 'Upcoming',
-					// 		2 => 'Wireframing'
-					// ],
-					'options_action' => 'App\Modules\Projects\Entities\ProjectStatusesRepository@allAsList'
-				]
-			];
+	[
+	'name' => 'first_name',
+	'display_name' => 'Your first name',
+	'value' => '1234',
+	],
+	[
+	'name' => 'last_name'
+	],
+	[
+	'name' => 'title'
+	],
+	[
+	'name' => 'project_status_id',
+	'display_name' => 'Project Status',
+	'type' => 'select',
+	// 'options' => [
+	//		1 => 'Upcoming',
+	// 		2 => 'Wireframing'
+	// ],
+	'options_action' => 'App\Modules\Projects\Entities\ProjectStatusesRepository@allAsList'
+	]
+	];
 	 *
 	 * @param array $editableFields
 	 */
-	public function setFields(array $editableFields)
+	public function setFields(array $editableFields, $resetExisting = true)
 	{
 
-		$this->fields = new Collection();
+		if ($resetExisting) $this->fields = new Collection();
+
 		foreach ($editableFields as $editableField) {
 
 			if (is_string($editableField)) {
@@ -221,9 +238,9 @@ class Formation
 				if (empty($editableField['type'])) {
 					$editableField['type'] = 'text';
 				}
-				
+
 				if ($editableField['type'] === 'select' && (
-					empty($editableField['options']) && empty($editableField['options_action']) && empty($editableField['options_entity']))) {
+						empty($editableField['options']) && empty($editableField['options_action']) && empty($editableField['options_entity']))) {
 					throw new Exception("A select field must an `options` specifier.");
 				}
 
@@ -278,7 +295,7 @@ class Formation
 
 		// look if the model has a the values set, and if so, add them to the fields
 		foreach($fields as $fieldData) {
-			 // get the field name
+			// get the field name
 			$value = $entity->getAttributeValue($fieldData['name']);
 
 			if (!empty($value)) {
