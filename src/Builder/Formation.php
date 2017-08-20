@@ -82,6 +82,11 @@ class Formation
 
 				$fieldObj = $this->input('text', $field['name'], $field['value'], $options);
 
+			} else if ($field['type'] === 'password') {
+
+				// don't show the password as the output
+				$fieldObj = $this->input('password', $field['name'], '', $options);
+
 			} else if ($field['type'] === 'textarea') {
 
 				$fieldObj = $this->textarea($field['name'], $field['value'], $options);

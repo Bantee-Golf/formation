@@ -2,6 +2,25 @@
 
 By default, it renders a Bootstrap 3, horizontal form layout.
 
+## Installation
+
+1. Add the repository to your `composer.json`
+
+```
+"repositories": [
+        {
+            "type":"vcs",
+            "url":"git@bitbucket.org:elegantmedia/formation.git"
+        }
+    ],
+```
+
+2. Require the package through the command line
+
+```
+composer require emedia/formation
+```
+
 ## How to use
 
 **Prepare the model**
@@ -65,6 +84,7 @@ In the controller
 Then in the view
 ```
 {{ $form->render() }}
+{{ $form->renderSubmit }}
 ```
 
 ### API
