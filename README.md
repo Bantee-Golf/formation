@@ -41,12 +41,20 @@ composer require emedia/formation
 			'name' => 'office_location_id',
 			'display_name' => 'Office Location',
 			'type' => 'select',
-			// retrieve all items. eg. OfficeLocation::all();
+
+			// Method 1 - retrieve all items. eg. OfficeLocation::all();
 			'options_entity' => 'App\Modules\HumanResources\Entities\OfficeLocation',
-			// alternatively use `options_action` to call a method from repository
+
+			// Method 2 - use `options_action` to call a method from repository
 			// 'options_action' => 'App\Modules\HumanResources\Entities\ProjectsRepository@allAsList',
 			// optional - you can pass an array of parameters to the 'options_action' method
 			// 'options_action_params' => [$entity->id],
+
+			// Method 3 - give the options directly
+			// 'options' => [
+            // 		'oneworld' => 'OneWorld',
+            //		'skyteam' => 'SkyTeam',
+            //	]
 		],
         [
 			'name' => 'joined_at',
@@ -66,8 +74,18 @@ composer require emedia/formation
 				'AUD' => 'AUD'
 			]
 		],
+		[
+            'name' => 'logo',
+            'type' => 'file',
+            'options' => [
+                'disk' => 'public_content',		// required
+                'disk_column' => 'disk',		// required
+                'path_column' => 'logo_path',	// required
+                'thumb_path_column' => 'logo_thumb_path',   // optional
+            ],
+        ],
 	];
-	
+
 ```
 
 In the controller

@@ -76,6 +76,9 @@ class Formation
 			// TODO: add other field types
 			$options = [];
 			$options['class'] = 'form-control';
+
+			if (!empty($field['class'])) $options['class'] .= ' ' . $field['class'];
+
 			if (!empty($field['placeholder'])) $options['placeholder'] = $field['placeholder'];
 
 			if ($field['type'] === 'text') {
@@ -150,7 +153,16 @@ class Formation
 					$actionsClass = app($field['options_entity']);
 					$optionsList = $actionsClass->all()->pluck('name', 'id');
 				}
+
+				if (isset($field['multiple'])) {
+					$options['multiple'] = 'multiple';
+				}
+
 				$fieldObj = $this->select($field['name'], $optionsList, $field['value'], $options);
+
+			} elseif ($field['type'] === 'file') {
+
+				$fieldObj = $this->file($field['name'], $options);
 			}
 
 			if ($field['type'] === 'hidden') {
@@ -268,6 +280,16 @@ class Formation
 			}
 
 		}
+	}
+
+	public function hasFiles()
+	{
+		// go through the fields and find if there are any files
+		$fileFields = $this->fields->filter(function ($item) {
+			return (isset($item['type']) && $item['type'] === 'file');
+		});
+
+		return $fileFields->isNotEmpty();
 	}
 
 	private function getLabelFromFieldName($fieldName)
