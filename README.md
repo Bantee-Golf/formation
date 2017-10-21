@@ -80,7 +80,7 @@ composer require emedia/formation
             'options' => [
                 'disk' => 'public_content',		// required
                 'disk_column' => 'disk',		// required
-                'path_column' => 'logo_path',	// required
+                'path_column' => 'logo_path',	// required - this must match with the 'name'. Otherwise you won't be able to edit the field
                 'thumb_path_column' => 'logo_thumb_path',   // optional
             ],
         ],

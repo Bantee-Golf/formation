@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\HtmlString;
 use Illuminate\View\Factory;
 
@@ -163,15 +164,55 @@ class Formation
 			} elseif ($field['type'] === 'file') {
 
 				$fieldObj = $this->file($field['name'], $options);
+
 			}
 
+			// render the fields
 			if ($field['type'] === 'hidden') {
 
 				$options = (isset($field['options']))? $field['options']: [];
 				$field = $this->hidden($field['name'], $field['value'], $options);
 				$renderedContent .= $field->toHtml();
 
+			} else if ($field['type'] === 'file') {
+				// create a custom file upload field with options to view and delete the file
+
+				$deleteCheckbox = $this->checkbox("{$field['name']}_delete_file");
+
+				$fileEditableHtml = '<div class="row"><div class="col-md-12">' . $fieldObj->toHtml() . '</div>';
+				$fileEditableHtml .= '</div>';
+
+				if (!empty($field['value'])) {
+					// try to build the URL for the existing file
+					$fileUrl = null;
+					if (isset($field['options']) && !empty($field['options']['disk'])) {
+						$fileUrl = Storage::disk($field['options']['disk'])->url($field['value']);
+					}
+					if ($fileUrl === null) $fileUrl = $field['value'];
+
+					// render the delete and view option
+					$fileEditableHtml .= '<div class="row">';
+					$fileEditableHtml .= '<div class="col-sm-2">' . $deleteCheckbox->toHtml() . ' Delete File</div><div class="col-sm-10">Current File: <a href="' . $fileUrl . '" target="_blank">' . $field['value'] . '</a></div>';
+					$fileEditableHtml .= '</div>';
+				}
+
+				$fileWrapper = $this->tag('div', $fileEditableHtml);
+
+				// wrap the existing obj with containers
+				$fieldWrapper = $this->tag('div', $fileWrapper->toHtml(), [
+					'class' => $fieldLayoutClass
+				]);
+
+				// TODO: add vertical layouts
+				$formGroupWrapper = $this->tag('div',
+					$label->toHtml() . $fieldWrapper->toHtml(), [
+						'class' => 'form-group'
+					]);
+
+				$renderedContent .= $formGroupWrapper->toHtml();
+
 			} else if (!empty($fieldObj)) {
+
 				// wrap the existing obj with containers
 				$fieldWrapper = $this->tag('div', $fieldObj->toHtml(), [
 					'class' => $fieldLayoutClass
