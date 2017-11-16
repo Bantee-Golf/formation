@@ -148,7 +148,8 @@ class Formation
 					if (isset($field['options_action_params']) && is_array($field['options_action_params'])) {
 						$optionsList = $actionsClass->$matches[2][0]($field['options_action_params']);
 					} else {
-						$optionsList = $actionsClass->$matches[2][0]();
+						$methodName = $matches[2][0];
+						$optionsList = $actionsClass->$methodName();
 					}
 				} else if (isset($field['options_entity'])) {
 					$actionsClass = app($field['options_entity']);
