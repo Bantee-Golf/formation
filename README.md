@@ -56,6 +56,17 @@ composer require emedia/formation
             //		'skyteam' => 'SkyTeam',
             //	]
 		],
+		[
+			// multi-option selects
+            'name' => 'destination_id[]',
+            'display_name' => 'Destinations',
+            'type' => 'select',
+            'multiple' => true,
+            'relationship' => 'destinations',       // optional. Use to resolve the relationship automatically.
+            'options_entity' => Destination::class, // or use methods from single-selects (as listed above)
+            'class' => 'select2',
+            'value' => [1],     // default value
+        ],
         [
 			'name' => 'joined_at',
 			'display_name' => 'Joined Date',

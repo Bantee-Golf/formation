@@ -369,6 +369,16 @@ class Formation
 
 			if (!empty($value)) {
 				$this->setFieldValue($fieldData['name'], $value);
+			} else {
+				// see if this is an array,
+				// if so, we should retrieve the relationship values
+				if (strpos($fieldData['name'], '[]') !== false) {
+					if (!empty($fieldData['relationship'])) {
+						$relationshipName = $fieldData['relationship'];
+						$relationshipIds = $entity->$relationshipName()->pluck('id')->toArray();
+						$this->setFieldValue($fieldData['name'], $relationshipIds);
+					}
+				}
 			}
 		}
 	}
