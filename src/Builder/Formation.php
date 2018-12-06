@@ -76,6 +76,11 @@ class Formation
 			// add the field
 			// TODO: add other field types
 			$options = [];
+
+			if (! empty($field['attributes'])) {
+				$options = array_merge($options, is_array($field['attributes']) ? $field['attributes'] : [$field['attributes']]);
+			}
+
 			$options['class'] = 'form-control';
 
 			if (!empty($field['class'])) $options['class'] .= ' ' . $field['class'];
