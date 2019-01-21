@@ -55,6 +55,15 @@ composer require emedia/formation
             // 		'oneworld' => 'OneWorld',
             //		'skyteam' => 'SkyTeam',
             //	]
+            
+            // Method 4 - load entities from AJAX requests
+            // [
+	        //     'name' => 'external_inspector_id[]',
+	        //    'display_name' => 'External Inspectors',
+	        //    'type' => 'select',
+	        //    'multiple' => true,   // optional
+	        //    'options_ajax_data_route' => 'manage.properties.inspectors.json', // this is the route to return the data
+	        // ],
 		],
 		[
 			// multi-option selects

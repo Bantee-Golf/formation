@@ -159,6 +159,12 @@ class Formation
 				} else if (isset($field['options_entity'])) {
 					$actionsClass = app($field['options_entity']);
 					$optionsList = $actionsClass->all()->pluck('name', 'id');
+				} else if (isset($field['options_ajax_data_route'])) {
+					// automatically add the 'js-select2-ajax' if no class was defined by the user
+					if (empty($field['class'])) {
+						$options['class'] .= ' select2 js-select2-ajax';
+					}
+					$options['data-ajax-route'] = route($field['options_ajax_data_route']);
 				}
 
 				if (isset($field['multiple'])) {
@@ -304,7 +310,7 @@ class Formation
 				}
 
 				if ($editableField['type'] === 'select' && (
-						empty($editableField['options']) && empty($editableField['options_action']) && empty($editableField['options_entity']))) {
+						empty($editableField['options']) && empty($editableField['options_action']) && empty($editableField['options_entity']) && (empty($editableField['options_ajax_data_route'])))) {
 					throw new Exception("A select field must an `options` specifier.");
 				}
 
