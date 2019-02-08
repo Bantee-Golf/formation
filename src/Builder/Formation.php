@@ -111,7 +111,9 @@ class Formation
 				$options['data-date-format'] = 'DD/MMM/YYYY';
 				$inputDate = '';
 				if ($field['value'] instanceof Carbon) {
-					$options['data-default-date'] = $field['value']->format('d/M/Y');
+					$inputDate = $options['data-default-date'] = $field['value']->format('d/M/Y');
+				} else {
+					$inputDate = (new Carbon($field['value']))->format('d/M/Y');
 				}
 
 				// set min/max dates
