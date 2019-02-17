@@ -179,6 +179,14 @@ class Formation
 
 				$fieldObj = $this->file($field['name'], $options);
 
+			} elseif ($field['type'] === 'location') {
+
+				if (isset($field['config'])) {
+					$fieldObj = lotus()->locationField($field['config']);
+				} else {
+					$fieldObj = lotus()->locationField();
+				}
+
 			}
 
 			// render the fields
