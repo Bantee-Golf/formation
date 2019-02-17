@@ -104,6 +104,10 @@ composer require emedia/formation
                 'thumb_path_column' => 'logo_thumb_path',   // optional
             ],
         ],
+        [
+            'name' => 'Address',
+            'type' => 'location',
+        ],
 	];
 
 ```
@@ -123,6 +127,42 @@ Then in the view
 ```
 {{ $form->render() }}
 {{ $form->renderSubmit }}
+```
+
+### Configuration Options
+
+To give more configuration options, instead of using the `$editable` property, override the `getEditableFields()` method. If you're using this method, the `$editable` property should be deleted from the model for clarity.
+
+Following example shows how to customise the `location` field and add multiple Google Autocomplete Address fields.
+
+```
+public function getEditableFields()
+{
+	return [
+		'name',
+		[
+			'name' => 'return_address',
+			'display_name' => 'Return Address',
+			'type' => 'location',
+			'config' => lotus()->locationConfig()
+							   ->setInputFieldPrefix('map3_')
+							   ->setSearchBoxElementId('js-search-box3')
+							   ->setMapElementId('map3')
+							   ->setAutoCompleteOptions([
+							        'types' => ['establishment'],
+							        'componentRestrictions' => [
+							            'country' => 'nz',
+									]
+							   ])
+		],
+		[
+			'display_name' => 'Phone',
+			'name' => '_map3_phone',        // let the auto-complete fill the phone number as well
+			'class' => 'js-autocomplete',
+		],
+		'email',
+	];
+}
 ```
 
 ### API
