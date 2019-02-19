@@ -14,6 +14,7 @@ class Formation
 {
 
 	protected $fields;
+	protected $model;
 
 	use BuildsFormElements;
 	use BuildsHtml;
@@ -181,11 +182,17 @@ class Formation
 
 			} elseif ($field['type'] === 'location') {
 
+				$locationField = new \EMedia\Lotus\Elements\Page\Location\LocationField();
+
 				if (isset($field['config'])) {
-					$fieldObj = lotus()->locationField($field['config']);
-				} else {
-					$fieldObj = lotus()->locationField();
+					$locationField->withConfig($field['config']);
 				}
+
+				if ($this->model) {
+					$locationField->withEloquentModel($this->model);
+				}
+
+				$fieldObj = $locationField->render();
 
 			}
 
@@ -362,6 +369,8 @@ class Formation
 
 	public function setModel(Model $entity)
 	{
+		$this->model = $entity;
+
 		// set the fields
 		if (!method_exists($entity, 'getEditableFields')) return false;
 
