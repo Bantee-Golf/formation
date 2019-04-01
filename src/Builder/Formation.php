@@ -43,7 +43,7 @@ class Formation
         </div>
 	 *
 	 */
-	public function render($fieldName = null)
+	public function render($fieldName = null, $exceptFields = [], $overrides = [])
 	{
 		$labelLayoutClass = 'col-sm-2';
 		$fieldLayoutClass = 'col-sm-10';
@@ -52,11 +52,25 @@ class Formation
 
 		$user = auth()->user();
 
-		foreach($this->fields as $field) {
+		$fields = $this->fields;
+		if (count($exceptFields)) {
+			$fields = $fields->filter(function ($item) use ($exceptFields) {
+				if (isset($item['name']) && !in_array($item['name'], $exceptFields)) {
+					return $item;
+				}
+			});
+		}
+
+		foreach($fields as $field) {
 
 			// if a fieldname is given, only render that one
 			if ($fieldName && $fieldName !== $field['name']) {
 				continue;
+			}
+
+			// merge any overrides
+			if (count($overrides)) {
+				$field = array_merge($field, $overrides);
 			}
 
 			// check user permissions
