@@ -73,6 +73,13 @@ class Formation
 				$field = array_merge($field, $overrides);
 			}
 
+            //check form session after post or put request
+            if($field['type'] != 'password'){
+                if(!empty(app('request')->old($field['name'], null))){
+                    $field['value'] = app('request')->old($field['name'], null);
+                }
+            }
+
 			// check user permissions
 			// if the user doesn't have the given role, don't show the field
 			if (isset($field['roles'])) {
