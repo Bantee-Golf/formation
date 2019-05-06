@@ -35,9 +35,9 @@ class Formation
 	/*
 	 * This generates the following horizontal layout
 	 *
-	 * <div class="form-group">
-            <label for="" class="col-sm-2 control-label">First Name</label>
-            <div class="col-sm-10">
+	 * <div class="form-group row">
+            <label for="" class="col-sm-4 control-label">First Name</label>
+            <div class="col-sm-8">
                 <input type="" class="form-control" name="name" value="{{ $entity->first_name }}">
             </div>
         </div>
@@ -45,8 +45,8 @@ class Formation
 	 */
 	public function render($fieldName = null, $exceptFields = [], $overrides = [])
 	{
-		$labelLayoutClass = 'col-sm-2';
-		$fieldLayoutClass = 'col-sm-10';
+		$labelLayoutClass = 'col-sm-4';
+		$fieldLayoutClass = 'col-sm-8';
 
 		$renderedContent = '';
 
@@ -271,7 +271,7 @@ class Formation
 				// TODO: add vertical layouts
 				$formGroupWrapper = $this->tag('div',
 					$label->toHtml() . $fieldWrapper->toHtml(), [
-						'class' => 'form-group'
+						'class' => 'form-group row'
 					]);
 
 				$renderedContent .= $formGroupWrapper->toHtml();
