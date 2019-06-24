@@ -256,7 +256,7 @@ class Formation
 				// TODO: add vertical layouts
 				$formGroupWrapper = $this->tag('div',
 					$label->toHtml() . $fieldWrapper->toHtml(), [
-						'class' => 'form-group'
+						'class' => 'form-group row'
 					]);
 
 				$renderedContent .= $formGroupWrapper->toHtml();
@@ -283,9 +283,9 @@ class Formation
 
 	public function renderSubmit()
 	{
-		$htmlContent = '<div class="form-group">
-            <div class="col-sm-10 col-sm-offset-2">
-                <a href="' . url()->previous() . '" class="btn btn-default pull-right">Cancel</a>
+		$htmlContent = '<div class="form-group row">
+            <div class="col-sm-8 offset-sm-4">
+                <a href="' . url()->previous() . '" class="btn btn-secondary pull-right">Cancel</a>
                 <button type="submit" class="btn btn-success text-right">Save</button>
             </div>
         </div>';
