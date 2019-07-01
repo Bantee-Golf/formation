@@ -349,7 +349,7 @@ class Formation
 
 				if ($editableField['type'] === 'select' && (
 						empty($editableField['options']) && empty($editableField['options_action']) && empty($editableField['options_entity']) && (empty($editableField['options_ajax_data_route'])))) {
-					throw new Exception("A select field must an `options` specifier.");
+					throw new Exception("A select field must have an `options` specifier.");
 				}
 
 				// name of the field (i.e. label)
