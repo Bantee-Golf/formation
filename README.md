@@ -126,7 +126,7 @@ In the controller
 Then in the view
 ```
 {{ $form->render() }}
-{{ $form->renderSubmit }}
+{{ $form->renderSubmit() }}
 ```
 
 ### Configuration Options
