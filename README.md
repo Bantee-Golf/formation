@@ -1,4 +1,4 @@
-# Auto-form Builder from Eloquent Models for Laravel 5
+# Auto-form Builder from Eloquent Models for Laravel 5 / 6
 
 By default, it renders a Bootstrap 3, horizontal form layout.
 
@@ -55,7 +55,7 @@ composer require emedia/formation
             // 		'oneworld' => 'OneWorld',
             //		'skyteam' => 'SkyTeam',
             //	]
-            
+
             // Method 4 - load entities from AJAX requests
             // [
 	        //     'name' => 'external_inspector_id[]',
@@ -119,7 +119,7 @@ In the controller
 	$entity->last_name = 'Kardashian';
 
 	$form = new Formation($entity);
-	
+
 	return view('user.profile', compact('form'));
 ```
 
@@ -168,15 +168,15 @@ public function getEditableFields()
 ### API
 ```
 	$form = new Formation($entity);
-	
+
 	// optional
-	 
+
 	// set fields manually
 	// $form->setFields($entity->getEditableFields());
-	
+
 	// set the values from model
 	// $form->setFieldValuesFromModel($entity);
-	
+
 	// set individual field values
 	// $form->setFieldValue('first_name', 'Khloe');
 ```
