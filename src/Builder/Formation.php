@@ -385,7 +385,7 @@ class Formation
 
 	private function getLabelFromFieldName($fieldName)
 	{
-		return title_case(reverse_snake_case($fieldName));
+		return \Illuminate\Support\Str::title(reverse_snake_case($fieldName));
 	}
 
 	public function setModel(Model $entity)

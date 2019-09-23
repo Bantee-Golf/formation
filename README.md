@@ -1,6 +1,8 @@
-# Auto-form Builder from Eloquent Models for Laravel 5 / 6
+# Auto-form Builder from Eloquent Models for Laravel 6
 
 By default, it renders a Bootstrap 3, horizontal form layout.
+
+Use version 0.1.x for Laravel 5.7 / 5.8
 
 ## Installation
 
