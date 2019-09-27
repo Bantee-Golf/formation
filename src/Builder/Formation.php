@@ -53,7 +53,7 @@ class Formation
 		$user = auth()->user();
 
 		$fields = $this->fields;
-		if (count($exceptFields)) {
+		if (is_countable($exceptFields) && count($exceptFields)) {
 			$fields = $fields->filter(function ($item) use ($exceptFields) {
 				if (isset($item['name']) && !in_array($item['name'], $exceptFields)) {
 					return $item;
@@ -69,7 +69,7 @@ class Formation
 			}
 
 			// merge any overrides
-			if (count($overrides)) {
+			if (is_countable($overrides) && count($overrides)) {
 				$field = array_merge($field, $overrides);
 			}
 
@@ -167,7 +167,7 @@ class Formation
 					// split the action string
 					// eg 'ProjectsRepository@allAsList'
 					preg_match_all('/^(.*)@(.*)$/i', $field['options_action'], $matches);
-					if (!count($matches) === 3)
+					if (!is_array($matches) || !count($matches) === 3)
 						throw new Exception("Invalid action {$field['options_action']}.");
 
 					// build the class and fetch the options

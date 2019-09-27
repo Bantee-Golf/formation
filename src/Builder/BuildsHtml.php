@@ -327,7 +327,7 @@ trait BuildsHtml
 	{
 		$html = '';
 
-		if (count($list) == 0) {
+		if (is_countable($list) && count($list) == 0) {
 			return $html;
 		}
 
