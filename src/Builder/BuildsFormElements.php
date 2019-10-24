@@ -2,6 +2,7 @@
 namespace EMedia\Formation\Builder;
 
 use DateTime;
+use Illuminate\Support\Arr;
 use Illuminate\Session\SessionInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
@@ -387,9 +388,9 @@ trait BuildsFormElements
 		// If the "size" attribute was not specified, we will just look for the regular
 		// columns and rows attributes, using sane defaults if these do not exist on
 		// the attributes array. We'll then return this entire options array back.
-		$cols = array_get($options, 'cols', 50);
+		$cols = Arr::get($options, 'cols', 50);
 
-		$rows = array_get($options, 'rows', 10);
+		$rows = Arr::get($options, 'rows', 10);
 
 		return array_merge($options, compact('cols', 'rows'));
 	}
