@@ -1,6 +1,6 @@
 {
   "name": "emedia/formation",
-  "description": "Form generator library for Laravel 6",
+  "description": "Form generator library for Laravel 6 and 7",
   "type": "package",
   "require": {
     "php": "^7.2",
