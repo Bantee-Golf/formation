@@ -6,15 +6,19 @@ Use version 0.1.x for Laravel 5.7 / 5.8
 
 ## Installation
 
-1. Add the repository to your `composer.json`
+1. Add the following repositories to your `composer.json`
 
 ```
 "repositories": [
-        {
-            "type":"vcs",
-            "url":"git@bitbucket.org:elegantmedia/formation.git"
-        }
-    ],
+    {
+        "type": "vcs",
+        "url": "git@bitbucket.org:elegantmedia/formation.git"
+    },
+    {
+        "type": "vcs",
+        "url": "git@bitbucket.org:elegantmedia/lotus.git"
+    }
+]
 ```
 
 2. Require the package through the command line
