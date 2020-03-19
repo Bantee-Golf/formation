@@ -1,12 +1,6 @@
-# Auto-form Builder from Eloquent Models for Laravel 6 and 7
+# Auto-form Builder from Eloquent Models for Laravel
 
-By default, it renders a Bootstrap 3, horizontal form layout.
-
-| Laravel       | Version      |
-| ------------- |:------------:|
-| 5.7/5.8       | 0.1.x        |
-| 6             | 0.2.x        |
-| 7             | 0.3.x        |
+By default, it renders a Bootstrap, horizontal form layout.
 
 ## Installation
 
@@ -30,6 +24,14 @@ By default, it renders a Bootstrap 3, horizontal form layout.
 ```
 composer require emedia/formation
 ```
+
+#### Version Compatibility
+
+| Laravel       | Version      |
+| ------------- |:------------:|
+| 5.7/5.8       | 0.1.x        |
+| 6             | 0.2.x        |
+| 7             | 0.3.x        |
 
 ## How to use
 
