@@ -1,20 +1,22 @@
-# Auto-form Builder from Eloquent Models for Laravel 6
+# Auto-form Builder from Eloquent Models for Laravel
 
-By default, it renders a Bootstrap 3, horizontal form layout.
-
-Use version 0.1.x for Laravel 5.7 / 5.8
+By default, it renders a Bootstrap, horizontal form layout.
 
 ## Installation
 
-1. Add the repository to your `composer.json`
+1. Add the following repositories to your `composer.json`
 
 ```
 "repositories": [
-        {
-            "type":"vcs",
-            "url":"git@bitbucket.org:elegantmedia/formation.git"
-        }
-    ],
+    {
+        "type": "vcs",
+        "url": "git@bitbucket.org:elegantmedia/formation.git"
+    },
+    {
+        "type": "vcs",
+        "url": "git@bitbucket.org:elegantmedia/lotus.git"
+    }
+]
 ```
 
 2. Require the package through the command line
@@ -22,6 +24,14 @@ Use version 0.1.x for Laravel 5.7 / 5.8
 ```
 composer require emedia/formation
 ```
+
+#### Version Compatibility
+
+| Laravel       | Version      |
+| ------------- |:------------:|
+| 5.7/5.8       | 0.1.x        |
+| 6             | 0.2.x        |
+| 7             | 0.3.x        |
 
 ## How to use
 
