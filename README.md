@@ -216,3 +216,50 @@ Add multiselect.css and multiselect.js to your page.
 If you want to change this class(multicheck) to different, change it in the model configuration
 array also.
 
+### Method 4 - load entities from AJAX requests
+
+Add this to the scripts
+
+```
+
+	$('.js-select2-ajax').each(function (index, element) {
+		var $el = $(element);
+		var ajaxUrl = $el.data('ajax-route');
+		if (ajaxUrl) {
+			$el.select2({
+				ajax: {
+					url: ajaxUrl,
+					dataType: 'json',
+					processResults: function (response) {
+						if (response.payload) {
+							return {
+								results: response.payload,
+							}
+						}
+						return [];
+					}
+				},
+				minimumInputLength: 2,
+			})
+		}
+	});
+
+```
+
+You should convert the array into the following format.
+
+```
+$responseData = $users->map(function ($item) {
+	return [
+		'id' => $item->id,
+		'text' => $item->full_name,
+	];
+});
+
+
+```
+
+And return the reponse through apiSuccess function.
+
+
+
