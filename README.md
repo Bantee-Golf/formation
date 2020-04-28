@@ -88,6 +88,17 @@ composer require emedia/formation
             'class' => 'select2',
             'value' => [1],     // default value
         ],
+		[
+			// this configuration is for multi select checkbox drop down.
+            'name' => 'product_ids[]',
+            'display_name' => 'Products',
+            'type' => 'select',
+            'multiple' => 'multiple', // *for multiple selection feature
+            'relationship' => 'products', 
+            'options_entity' => Product::class,
+            'class' => 'multicheck', // *make the class as multi check
+            'value' => [1], 
+        ],
         [
 			'name' => 'joined_at',
 			'display_name' => 'Joined Date',
@@ -192,3 +203,63 @@ public function getEditableFields()
 	// set individual field values
 	// $form->setFieldValue('first_name', 'Khloe');
 ```
+
+**Multiselect Checkbox Dropdown**
+Add multiselect.css and multiselect.js to your page.
+[Boostrap Multiselect js Page](https://github.com/davidstutz/bootstrap-multiselect)
+```
+	$('.multicheck').multiselect({
+            includeSelectAllOption: true
+    });
+```
+
+If you want to change this class(multicheck) to different, change it in the model configuration
+array also.
+
+### Method 4 - load entities from AJAX requests
+
+Add this to the scripts
+
+```
+
+	$('.js-select2-ajax').each(function (index, element) {
+		var $el = $(element);
+		var ajaxUrl = $el.data('ajax-route');
+		if (ajaxUrl) {
+			$el.select2({
+				ajax: {
+					url: ajaxUrl,
+					dataType: 'json',
+					processResults: function (response) {
+						if (response.payload) {
+							return {
+								results: response.payload,
+							}
+						}
+						return [];
+					}
+				},
+				minimumInputLength: 2,
+			})
+		}
+	});
+
+```
+
+You should convert the array into the following format.
+
+```
+$responseData = $users->map(function ($item) {
+	return [
+		'id' => $item->id,
+		'text' => $item->full_name,
+	];
+});
+
+
+```
+
+And return the reponse through apiSuccess function.
+
+
+
