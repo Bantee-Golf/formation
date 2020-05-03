@@ -131,11 +131,23 @@ class Formation
 
 				$options['class'] .= ' ' . 'js-datepicker';
 				$options['data-date-format'] = 'DD/MMM/YYYY';
+
+				// TODO: get the format from config, if it exists
+				$dateFormat = 'd/M/Y';
+
 				$inputDate = '';
 				if ($field['value'] instanceof Carbon) {
-					$inputDate = $options['data-default-date'] = $field['value']->format('d/M/Y');
+					$inputDate = $options['data-default-date'] = $field['value']->format($dateFormat);
 				} else {
-					$inputDate = (new Carbon($field['value']))->format('d/M/Y');
+					try {
+						// Note from Shane:
+						// the conversion below is not necessary,
+						// because it's taking a string -> convert to a date -> convert back to a string
+						// this will fail with an exception of the date is given in an unknown format
+						$inputDate = (new Carbon($field['value']))->format($dateFormat);
+					} catch (\Exception $ex) {
+						$inputDate = $field['value'];
+					}
 				}
 
 				// set min/max dates
