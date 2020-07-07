@@ -274,9 +274,15 @@ class Formation
 				$renderedContent .= $formGroupWrapper->toHtml();
 
 			} else if (!empty($fieldObj)) {
+				$helpWrapper = null;
+				if (!empty($field['help'])) {
+					$helpWrapper = $this->tag('small', $field['help'], [
+						'class' => 'form-text text-muted'
+					]);
+				}
 
 				// wrap the existing obj with containers
-				$fieldWrapper = $this->tag('div', $fieldObj->toHtml(), [
+				$fieldWrapper = $this->tag('div', $fieldObj->toHtml() . ($helpWrapper != null ? "\n" . $helpWrapper->toHtml() : ''), [
 					'class' => $fieldLayoutClass
 				]);
 
