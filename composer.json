@@ -4,8 +4,8 @@
   "type": "package",
   "require": {
     "php": "^7.2",
-    "illuminate/support": "^5.7|^6.0|^7.0",
-    "illuminate/session": "^5.7|^6.0|^7.0",
+    "illuminate/support": "^6.0|^7.0|^8.0",
+    "illuminate/session": "^6.0|^7.0|^8.0",
     "emedia/lotus": "~1.2"
   },
   "license": "private",

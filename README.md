@@ -29,9 +29,10 @@ composer require emedia/formation
 
 | Laravel       | Version      |
 | ------------- |:------------:|
-| 5.7/5.8       | 0.1.x        |
-| 6             | 0.2.x        |
+| 7, 8          | 0.4.x        |
 | 7             | 0.3.x        |
+| 6             | 0.2.x        |
+| 5.7/5.8       | 0.1.x        |
 
 ## How to use
 
