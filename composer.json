@@ -6,7 +6,7 @@
     "php": "^7.2",
     "illuminate/support": "^6.0|^7.0|^8.0",
     "illuminate/session": "^6.0|^7.0|^8.0",
-    "emedia/lotus": "~1.2"
+    "emedia/lotus": "~1.4"
   },
   "license": "private",
   "authors": [
@@ -25,5 +25,7 @@
       "type": "vcs",
       "url": "git@bitbucket.org:elegantmedia/lotus.git"
     }
-  ]
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
