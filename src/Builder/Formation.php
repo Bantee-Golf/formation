@@ -2,6 +2,7 @@
 namespace EMedia\Formation\Builder;
 
 use Carbon\Carbon;
+use ElegantMedia\PHPToolkit\Text;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\UrlGenerator;
@@ -403,7 +404,7 @@ class Formation
 
 	private function getLabelFromFieldName($fieldName)
 	{
-		return \Illuminate\Support\Str::title(reverse_snake_case($fieldName));
+		return \Illuminate\Support\Str::title(Text::reverseSnake($fieldName));
 	}
 
 	public function setModel(Model $entity)

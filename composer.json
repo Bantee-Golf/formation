@@ -6,7 +6,9 @@
     "php": "^7.2",
     "illuminate/support": "^6.0|^7.0|^8.0",
     "illuminate/session": "^6.0|^7.0|^8.0",
-    "emedia/lotus": "~1.4"
+    "emedia/lotus": "^1.0",
+    "laravelcollective/html": "^5.0|^6.0",
+    "elegantmedia/php-toolkit": "^1.0"
   },
   "license": "private",
   "authors": [
