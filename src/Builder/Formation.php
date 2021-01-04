@@ -167,6 +167,10 @@ class Formation
 							$options['data-max-date'] = $givenDate;
 						}
 					}
+					// set date format
+					if (!empty($field['data']['date_format'])) {
+						$options['data-date-format'] = $field['data']['date_format'];
+					}
 				}
 
 				$fieldObj = $this->input('text', $field['name'], $inputDate, $options);
