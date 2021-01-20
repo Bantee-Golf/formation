@@ -85,7 +85,7 @@ class Formation
 			// if the user doesn't have the given role, don't show the field
 			if (isset($field['roles'])) {
 				$allowedRoles = $field['roles'];
-				if (!$user->is($allowedRoles)) {
+				if (!$user->isA($allowedRoles)) {
 					continue;
 				}
 			}
@@ -139,6 +139,8 @@ class Formation
 				$inputDate = '';
 				if ($field['value'] instanceof Carbon) {
 					$inputDate = $options['data-default-date'] = $field['value']->format($dateFormat);
+				} elseif (empty($field['value'])) {
+					// if the input is null or empty, then this field must be left blank
 				} else {
 					try {
 						// Note from Shane:
