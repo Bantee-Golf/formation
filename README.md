@@ -87,7 +87,8 @@ composer require emedia/formation
             'relationship' => 'destinations',       // optional. Use to resolve the relationship automatically.
             'options_entity' => Destination::class, // or use methods from single-selects (as listed above)
             'class' => 'select2',
-            'value' => [1],     // default value
+            'value' => [1],     // default value,
+            'placeholder' => 'Pick an option...',	// Placeholder drop-down
         ],
 		[
 			// this configuration is for multi select checkbox drop down.

@@ -193,10 +193,10 @@ class Formation
 					$actionsClass = app($matches[1][0]);
 
 					// if there is an array of arguments, pass that in
+					$methodName = $matches[2][0];
 					if (isset($field['options_action_params']) && is_array($field['options_action_params'])) {
-						$optionsList = $actionsClass->$matches[2][0]($field['options_action_params']);
+						$optionsList = $actionsClass->$methodName($field['options_action_params']);
 					} else {
-						$methodName = $matches[2][0];
 						$optionsList = $actionsClass->$methodName();
 					}
 				} else if (isset($field['options_entity'])) {
