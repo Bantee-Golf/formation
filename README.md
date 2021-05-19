@@ -1,3 +1,4 @@
+
 # Auto-form Builder from Eloquent Models for Laravel
 
 By default, it renders a Bootstrap, horizontal form layout.
@@ -87,8 +88,7 @@ composer require emedia/formation
             'relationship' => 'destinations',       // optional. Use to resolve the relationship automatically.
             'options_entity' => Destination::class, // or use methods from single-selects (as listed above)
             'class' => 'select2',
-            'value' => [1],     // default value,
-            'placeholder' => 'Pick an option...',	// Placeholder drop-down
+            'value' => [1],     // default value
         ],
 		[
 			// this configuration is for multi select checkbox drop down.
@@ -192,21 +192,85 @@ public function getEditableFields()
 
 ### API
 ```
-	$form = new Formation($entity);
+$form = new Formation($entity);
 
-	// optional
+// optional
 
-	// set fields manually
-	// $form->setFields($entity->getEditableFields());
+// set fields manually
+// $form->setFields($entity->getEditableFields());
 
-	// set the values from model
-	// $form->setFieldValuesFromModel($entity);
+// set the values from model
+// $form->setFieldValuesFromModel($entity);
 
-	// set individual field values
-	// $form->setFieldValue('first_name', 'Khloe');
+// set individual field values
+// $form->setFieldValue('first_name', 'Khloe');
 ```
 
-**Multiselect Checkbox Dropdown**
+## Handling Dropdowns
+
+### Option 1 - Multiselect (with only HTML)
+
+The dropdown items can be rendered directly from a list. Use this method only if there is a limited amout of items to select from. For 200+ items, use the AJAX  method listed below.
+
+```
+use EMedia\Formation\Entities\GeneratesFields;
+use \Illuminate\Database\Eloquent\Model;
+
+class Project extends Model
+{
+	use GeneratesFields;
+	
+	protected $editable = [
+		[
+			'name' => 'role_id',
+			'display_name' => 'Role',
+			'options_action' => '\App\Entities\Auth\RolesRepository@dropdownList',
+			// 'options_action_params' => [true],		// optional (these wll be passed to the method above)
+			'type' => 'select',
+			'multiple' => true,
+			'help' => 'Select 1 or more roles.',		// optional
+		]
+	];
+	
+	// use a custom function to cast the return IDs to an array.
+	// The `roles()` method must be an exsiting relationship in the model.
+	public function getRoleIdAttribute()
+	{
+		return $this->roles()->pluck('id')->toArray();
+	}
+	
+	public function roles()
+	{
+		return $this->belongsToMany(\App\Entities\Auth\Role::class);
+	}
+}
+```
+
+The repository should return the items for the method listed in `options_action`.
+
+```
+namespace App\Entities\Auth;
+
+class RolesRepository 
+{
+
+	public function dropdownList()
+	{
+		$all = \App\Entities\Auth\Role::orderBy('title')->get();
+	
+		$results = [];
+		foreach ($all as $item) {
+			$results[$item->id] = $item->title;
+		}
+	
+		return $results;
+	}
+
+}
+```
+
+### Option 2 - Multiselect (with JS/Bootstrap)
+
 Add multiselect.css and multiselect.js to your page.
 [Boostrap Multiselect js Page](https://github.com/davidstutz/bootstrap-multiselect)
 ```
@@ -218,7 +282,8 @@ Add multiselect.css and multiselect.js to your page.
 If you want to change this class(multicheck) to different, change it in the model configuration
 array also.
 
-### Method 4 - load entities from AJAX requests
+
+### Option 3 - Multiselect (with AJAX, Typeahead)
 
 Add this to the scripts
 
@@ -261,7 +326,7 @@ $responseData = $users->map(function ($item) {
 
 ```
 
-And return the reponse through apiSuccess function.
+And return the response through apiSuccess function.
 
 
 
