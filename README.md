@@ -222,22 +222,16 @@ class Project extends Model
 	
 	protected $editable = [
 		[
-			'name' => 'role_id',
+			'name' => 'role_id[]',
 			'display_name' => 'Role',
 			'options_action' => '\App\Entities\Auth\RolesRepository@dropdownList',
 			// 'options_action_params' => [true],		// optional (these wll be passed to the method above)
 			'type' => 'select',
+			'relationship' => 'roles', 					// this is the related method. This will only be used when the name is an array.
 			'multiple' => true,
 			'help' => 'Select 1 or more roles.',		// optional
 		]
 	];
-	
-	// use a custom function to cast the return IDs to an array.
-	// The `roles()` method must be an exsiting relationship in the model.
-	public function getRoleIdAttribute()
-	{
-		return $this->roles()->pluck('id')->toArray();
-	}
 	
 	public function roles()
 	{
