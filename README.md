@@ -28,12 +28,14 @@ composer require emedia/formation
 
 #### Version Compatibility
 
-| Laravel       | Version      |
-| ------------- |:------------:|
-| 7, 8          | 0.4.x        |
-| 7             | 0.3.x        |
-| 6             | 0.2.x        |
-| 5.7/5.8       | 0.1.x        |
+| Laravel       | Version       |
+| ------------- |:-------------:|
+| 7, 8          | 0.4.x - 0.5.x |
+| 7             | 0.3.x         |
+| 6             | 0.2.x         |
+| 5.7/5.8       | 0.1.x         |
+
+See [CHANGELOG](CHANGELOG.md) for change history.
 
 ## How to use
 
@@ -46,6 +48,7 @@ composer require emedia/formation
 			'name' => 'first_name',
 			'display_name' => 'Your first name',    // (optional label)
 			'value' => '1234',  // (optional value)
+			'help' => 'Helper text to explain what the field does.', // (optional)
 		],
 		[
 			'name' => 'last_name'

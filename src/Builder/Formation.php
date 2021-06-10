@@ -443,7 +443,7 @@ class Formation
 			// get the field name
 			$value = $entity->getAttributeValue($fieldData['name']);
 
-			if (!empty($value)) {
+			if ($value !== null) {
 				$this->setFieldValue($fieldData['name'], $value);
 			} else {
 				// see if this is an array,
@@ -470,7 +470,8 @@ class Formation
 	 */
 	private function setFieldValue($fieldName, $value)
 	{
-		if (empty($value)) return false;
+		// we'll let the incoming value to be set on field as it is.
+		// if (empty($value)) return false;
 
 		// go through all fields, and update the given value
 		$this->fields->transform(function ($fieldData) use ($fieldName, $value) {
