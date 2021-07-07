@@ -123,12 +123,13 @@ See [CHANGELOG](CHANGELOG.md) for change history.
 			]
 		],
 		[
-            'name' => 'logo',
+            'name' => 'image_url',				// this should match with `url_column` if you want the ablity to delete
             'type' => 'file',
             'options' => [
                 'disk' => 'public_content',		// required
-                'disk_column' => 'disk',		// required
-                'path_column' => 'logo_path',	// required - this must match with the 'name'. Otherwise you won't be able to edit the field
+                'url_column' => 'image_url',	// required
+                'disk_column' => 'image_disk',	// required
+                'path_column' => 'image_path',	// required - this must match with the 'name'. Otherwise you won't be able to edit the field
                 'thumb_path_column' => 'logo_thumb_path',   // optional
             ],
         ],
