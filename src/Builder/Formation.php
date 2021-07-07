@@ -254,8 +254,12 @@ class Formation
 				if (!empty($field['value'])) {
 					// try to build the URL for the existing file
 					$fileUrl = null;
-					if (isset($field['options']) && !empty($field['options']['disk'])) {
-						$fileUrl = Storage::disk($field['options']['disk'])->url($field['value']);
+					if (strpos('http', $field['value']) === 0) {
+						$fileUrl = $field['value'];
+					} else {
+						if (isset($field['options']) && !empty($field['options']['disk'])) {
+							$fileUrl = Storage::disk($field['options']['disk'])->url($field['value']);
+						}
 					}
 					if ($fileUrl === null) $fileUrl = $field['value'];
 
