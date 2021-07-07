@@ -254,7 +254,7 @@ class Formation
 				if (!empty($field['value'])) {
 					// try to build the URL for the existing file
 					$fileUrl = null;
-					if (strpos('http', $field['value']) === 0) {
+					if (strpos($field['value'], 'http') === 0) {
 						$fileUrl = $field['value'];
 					} else {
 						if (isset($field['options']) && !empty($field['options']['disk'])) {
