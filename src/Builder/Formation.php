@@ -212,6 +212,11 @@ class Formation
 
 				if (isset($field['multiple'])) {
 					$options['multiple'] = 'multiple';
+					if (isset($field['group_as_array'])) {
+						if (strrpos($field['name'], '[]', -2) !== true) {
+							$field['name'] .= '[]';
+						}
+					}
 				}
 
 				$fieldObj = $this->select($field['name'], $optionsList, $field['value'], $options);

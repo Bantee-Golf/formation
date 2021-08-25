@@ -95,10 +95,11 @@ See [CHANGELOG](CHANGELOG.md) for change history.
         ],
 		[
 			// this configuration is for multi select checkbox drop down.
-            'name' => 'product_ids[]',
+            'name' => 'product_ids',
             'display_name' => 'Products',
             'type' => 'select',
             'multiple' => 'multiple', // *for multiple selection feature
+            'group_as_array' => true,	// group input field as array (i.e. add `[]` to the end of field name)
             'relationship' => 'products', 
             'options_entity' => Product::class,
             'class' => 'multicheck', // *make the class as multi check
