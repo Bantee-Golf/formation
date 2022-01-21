@@ -3,33 +3,10 @@ namespace EMedia\Formation\Builder;
 
 use DateTime;
 use Illuminate\Support\Arr;
-use Illuminate\Session\SessionInterface;
 use Illuminate\Support\Collection;
-use Illuminate\Support\HtmlString;
 
 trait BuildsFormElements
 {
-
-	/**
-	 * The HTML builder instance.
-	 *
-	 * @var \Collective\Html\HtmlBuilder
-	 */
-	// protected $html;
-
-	/**
-	 * The URL generator instance.
-	 *
-	 * @var \Illuminate\Contracts\Routing\UrlGenerator
-	 */
-	//protected $url;
-
-	/**
-	 * The View factory instance.
-	 *
-	 * @var \Illuminate\Contracts\View\Factory
-	 */
-	// protected $view;
 
 	/**
 	 * The CSRF token used by the form builder.
