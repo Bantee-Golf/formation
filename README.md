@@ -122,16 +122,18 @@ composer require emedia/formation
 			]
 		],
 		[
-            'name' => 'image_url',				// this should match with `url_column` if you want the ablity to delete
-            'type' => 'file',
-            'options' => [
-                'disk' => 'public_content',		// required
-                'url_column' => 'image_url',	// required
-                'disk_column' => 'image_disk',	// required
-                'path_column' => 'image_path',	// required - this must match with the 'name'. Otherwise you won't be able to edit the field
-                'thumb_path_column' => 'logo_thumb_path',   // optional
-            ],
-        ],
+			'name' => 'logo_file_url',              // this should match with `url_column` if you want the ablity to delete
+			'display_name' => 'Logo',               // the file name to display in the form
+			'type' => 'file',
+			'options' => [
+				'disk' => 'club_logos',     // required
+				'use_db_prefix' => 'logo',	// required
+				// 'folder' => '',                   // optional
+				// 'generate_thumb' => false,        // optional - default is false
+				// 'is_image' => false,              // optional - default is false
+				// 'delete_from_disk' => false,      // optional - default is false
+			],
+		],
         [
             'name' => 'Address',
             'type' => 'location',
