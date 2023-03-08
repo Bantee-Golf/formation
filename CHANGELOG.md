@@ -1,12 +1,8 @@
 # Change Log
 
-## Version Compatibility
-
-| Laravel Version   | Oxygen Version    | Branch           |
-| -----------------:| ----------------- |------------------|
-| v9                | 1.x               | master           |
-| v8                | 0.5               | version/v0.4     |
-| v7                | 0.3               | version/v0.3     |
+## v2.0.0
+- Support for Laravel 10
+- Removed PHP 8.0 Support
 
 ## v1.0.0
 - Support for Illuminate 9

@@ -4,11 +4,12 @@ By default, it renders a Bootstrap, horizontal form layout.
 
 ## Version Compatibility
 
-| Laravel Version   | Oxygen Version    | Branch           |
-| -----------------:| ----------------- |------------------|
-| v9                | 1.x               | master           |
-| v8                | 0.5               | version/v0.4     |
-| v7                | 0.3               | version/v0.3     |
+| Laravel Version | Oxygen Version | Branch       |
+|----------------:|----------------|--------------|
+|             v10 | 2.x            | 2.x          |
+|              v9 | 1.x            | 1.x          |
+|              v8 | 0.5            | version/v0.4 |
+|              v7 | 0.3            | version/v0.3 |
 
 See [CHANGE LOG](CHANGELOG.md) for version history.
 
@@ -328,4 +329,6 @@ $responseData = $users->map(function ($item) {
 And return the response through apiSuccess function.
 
 
+## Copyright
 
+Copyright (c) Elegant Media
