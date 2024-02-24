@@ -27,7 +27,7 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "git@bitbucket.org:elegantmedia/lotus.git"
+      "url": "git@github.com:Bantee-Golf/lotus.git"
     }
   ],
   "minimum-stability": "dev",
