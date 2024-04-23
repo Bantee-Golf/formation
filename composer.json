@@ -1,13 +1,15 @@
 {
   "name": "emedia/formation",
-  "description": "Form generator library for Laravel 6 and 7",
+  "description": "Form generator library for Laravel 9+",
   "type": "package",
   "require": {
-    "php": "^7.2|^8.0",
-    "illuminate/support": "^6.0|^7.0|^8.0",
-    "illuminate/session": "^6.0|^7.0|^8.0",
-    "emedia/lotus": "^1.0",
-    "laravelcollective/html": "^5.0|^6.0",
+    "php": "^8.0",
+    "illuminate/support": "^9.0",
+    "illuminate/session": "^9.0",
+    "illuminate/routing": "^9.0",
+    "illuminate/database": "^9.0",
+    "illuminate/view": "^9.0",
+    "emedia/lotus": "^2.0",
     "elegantmedia/php-toolkit": "^1.0"
   },
   "license": "private",
