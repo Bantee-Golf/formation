@@ -1,17 +1,7 @@
+
 # Auto-form Builder from Eloquent Models for Laravel
 
 By default, it renders a Bootstrap, horizontal form layout.
-
-## Version Compatibility
-
-| Laravel Version | Oxygen Version | Branch       |
-|----------------:|----------------|--------------|
-|             v10 | 2.x            | 2.x          |
-|              v9 | 1.x            | 1.x          |
-|              v8 | 0.5            | version/v0.4 |
-|              v7 | 0.3            | version/v0.3 |
-
-See [CHANGE LOG](CHANGELOG.md) for version history.
 
 ## Installation
 
@@ -35,6 +25,17 @@ See [CHANGE LOG](CHANGELOG.md) for version history.
 ```
 composer require emedia/formation
 ```
+
+#### Version Compatibility
+
+| Laravel       | Version       |
+| ------------- |:-------------:|
+| 7, 8          | 0.4.x - 0.5.x |
+| 7             | 0.3.x         |
+| 6             | 0.2.x         |
+| 5.7/5.8       | 0.1.x         |
+
+See [CHANGELOG](CHANGELOG.md) for change history.
 
 ## How to use
 
@@ -123,18 +124,16 @@ composer require emedia/formation
 			]
 		],
 		[
-			'name' => 'logo_file_url',              // this should match with `url_column` if you want the ablity to delete
-			'display_name' => 'Logo',               // the file name to display in the form
-			'type' => 'file',
-			'options' => [
-				'disk' => 'club_logos',     // required
-				'use_db_prefix' => 'logo',	// required
-				// 'folder' => '',                   // optional
-				// 'generate_thumb' => false,        // optional - default is false
-				// 'is_image' => false,              // optional - default is false
-				// 'delete_from_disk' => false,      // optional - default is false
-			],
-		],
+            'name' => 'image_url',				// this should match with `url_column` if you want the ablity to delete
+            'type' => 'file',
+            'options' => [
+                'disk' => 'public_content',		// required
+                'url_column' => 'image_url',	// required
+                'disk_column' => 'image_disk',	// required
+                'path_column' => 'image_path',	// required - this must match with the 'name'. Otherwise you won't be able to edit the field
+                'thumb_path_column' => 'logo_thumb_path',   // optional
+            ],
+        ],
         [
             'name' => 'Address',
             'type' => 'location',
@@ -329,6 +328,4 @@ $responseData = $users->map(function ($item) {
 And return the response through apiSuccess function.
 
 
-## Copyright
 
-Copyright (c) Elegant Media

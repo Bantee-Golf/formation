@@ -5,8 +5,11 @@ use Carbon\Carbon;
 use ElegantMedia\PHPToolkit\Text;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\HtmlString;
+use Illuminate\View\Factory;
 
 class Formation
 {
@@ -489,6 +492,20 @@ class Formation
 
 		return true;
 	}
+
+//	private function getFieldType($editableField)
+//	{
+//		if (empty($editableField['type'])) return 'text';
+//
+//		switch ($editableField['type']) {
+//			case 'text':
+//				return 'text';
+//				break;
+//			default:
+//				return 'text';
+//		}
+//	}
+
 
 
 }

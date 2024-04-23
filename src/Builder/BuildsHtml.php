@@ -22,6 +22,18 @@ trait BuildsHtml
 	protected $view;
 
 	/**
+	 * Create a new HTML builder instance.
+	 *
+	 * @param \Illuminate\Contracts\Routing\UrlGenerator $url
+	 * @param \Illuminate\Contracts\View\Factory         $view
+	 */
+//	public function __construct(UrlGenerator $url = null, Factory $view)
+//	{
+//		$this->url = $url;
+//		$this->view = $view;
+//	}
+
+	/**
 	 * Convert an HTML string to entities.
 	 *
 	 * @param string $value
@@ -32,6 +44,18 @@ trait BuildsHtml
 	{
 		return htmlentities($value, ENT_QUOTES, 'UTF-8', false);
 	}
+
+	/**
+	 * Convert entities to HTML characters.
+	 *
+	 * @param string $value
+	 *
+	 * @return string
+	 */
+//	public function decode($value)
+//	{
+//		return html_entity_decode($value, ENT_QUOTES, 'UTF-8');
+//	}
 
 	/**
 	 * Generate a link to a JavaScript file.
